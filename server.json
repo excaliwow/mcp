@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "name": "io.github.excaliwow/mcp",
+  "description": "Let an AI agent create, read, render, manage, and edit Excaliwow (hosted Excalidraw) diagrams over the public REST API.",
+  "repository": {
+    "url": "https://github.com/excaliwow/mcp",
+    "source": "github"
+  },
+  "version": "0.3.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@excaliwow/mcp",
+      "version": "0.3.0",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "EXCALIWOW_TOKEN",
+          "description": "Personal Access Token from excaliwow.com (Settings -> Developer / API tokens). read + write covers 5 of 7 tools; add delete for trash/restore.",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}
