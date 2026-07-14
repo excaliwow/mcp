@@ -1,24 +1,35 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.excaliwow/mcp",
-  "description": "Let an AI agent create, read, render, manage, and edit Excaliwow (hosted Excalidraw) diagrams over the public REST API.",
+  "title": "Excaliwow",
+  "description": "Create, read, render, organize, and safely edit persistent Excalidraw diagrams with AI agents.",
   "repository": {
     "url": "https://github.com/excaliwow/mcp",
     "source": "github"
   },
-  "version": "0.3.0",
+  "version": "0.13.2",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "@excaliwow/mcp",
-      "version": "0.3.0",
-      "transport": { "type": "stdio" },
+      "version": "0.13.2",
+      "transport": {
+        "type": "stdio"
+      },
       "environmentVariables": [
         {
           "name": "EXCALIWOW_TOKEN",
-          "description": "Personal Access Token from excaliwow.com (Settings -> Developer / API tokens). read + write covers 5 of 7 tools; add delete for trash/restore.",
+          "description": "Excaliwow Personal Access Token with read and write capabilities. Add delete only for trash and restore tools.",
           "isRequired": true,
-          "isSecret": true
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "EXCALIWOW_API_URL",
+          "description": "Optional Excaliwow API origin. Leave unset to use https://excaliwow.com.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string"
         }
       ]
     }
