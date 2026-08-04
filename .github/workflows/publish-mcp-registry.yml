@@ -1,0 +1,37 @@
+name: Publish MCP Registry metadata
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type io.github.excaliwow/mcp@0.14.2 to publish
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    if: inputs.confirmation == 'io.github.excaliwow/mcp@0.14.2'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out public metadata
+        uses: actions/checkout@v5
+
+      - name: Install verified MCP publisher
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://github.com/modelcontextprotocol/registry/releases/download/v1.7.9/mcp-publisher_linux_amd64.tar.gz"
+          curl --fail --location --silent --show-error "$url" --output mcp-publisher.tar.gz
+          echo "ab128162b0616090b47cf245afe0a23f3ef08936fdce19074f5ba0a4469281ac  mcp-publisher.tar.gz" | sha256sum --check
+          tar -xzf mcp-publisher.tar.gz mcp-publisher
+          ./mcp-publisher --version
+
+      - name: Authenticate as the excaliwow repository
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish io.github.excaliwow/mcp@0.14.2
+        run: ./mcp-publisher publish
