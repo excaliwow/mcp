@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       confirmation:
-        description: Type io.github.excaliwow/mcp@0.14.2 to publish
+        description: Type io.github.excaliwow/mcp@0.14.3 to publish
         required: true
         type: string
 
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   publish:
-    if: inputs.confirmation == 'io.github.excaliwow/mcp@0.14.2'
+    if: inputs.confirmation == 'io.github.excaliwow/mcp@0.14.3'
     runs-on: ubuntu-latest
     steps:
       - name: Check out public metadata
@@ -33,5 +33,5 @@ jobs:
       - name: Authenticate as the excaliwow repository
         run: ./mcp-publisher login github-oidc
 
-      - name: Publish io.github.excaliwow/mcp@0.14.2
+      - name: Publish io.github.excaliwow/mcp@0.14.3
         run: ./mcp-publisher publish
